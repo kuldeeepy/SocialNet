@@ -30,7 +30,7 @@ function Post() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:2000/feed")
+      .get(`${URL}/feed`)
       .then((res) => {
         setLoading(false);
         setLike(like);
