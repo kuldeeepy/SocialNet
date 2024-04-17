@@ -42,8 +42,7 @@ router.post(
   "/login",
   wrapper(async (req, res) => {
     let { uname, pwd } = req.body;
-    if (uname || pwd)
-      return res.status(401).json({ message: "Provide all the details!" });
+
 
     let user = await User.findOne({ uname });
 
