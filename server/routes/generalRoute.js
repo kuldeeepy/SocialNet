@@ -1,6 +1,6 @@
 import express from "express";
 import User from "../modals/userModal.js";
-import Reel from "../modals/ReelModal.js";
+import Reel from "../modals/reelModal.js";
 import multer from "multer";
 import Comment from "../modals/commentModal.js";
 import { wrapper } from "../controllers/customError.js";
