@@ -10,7 +10,7 @@ import Profile from "./pages/Profile.jsx";
 import Nav from "./components/Nav.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
 import CreateReel from "./pages/CreateReel.jsx";
-const URL = "http://localhost:2000";
+const URL = "https://socialnet-dblr.onrender.com";
 
 function App() {
   return (
