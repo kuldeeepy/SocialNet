@@ -13,8 +13,9 @@ import postRoute from "./routes/postRoute.js";
 // https://social-net-five.vercel.app
 // 'https://socialnet-dblr.onrender.com'
 // "http://localhost:5173"
-let corsOpts = { origin: "https://social-net-five.vercel.app", credentials: true };
-app.use(cors(corsOpts));
+let allorigins = ["https://social-net-five.vercel.app", "https://social-ahxi5z12z-kuldeeepys-projects.vercel.app"]
+// let corsOpts = ;
+app.use(cors({ origin: allorigins, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
