@@ -10,8 +10,10 @@ const app = express();
 import userRoute from "./routes/userRoute.js";
 import generalRoute from "./routes/generalRoute.js";
 import postRoute from "./routes/postRoute.js";
-
-let corsOpts = { origin: ["http://localhost:5173", 'https://social-net-five.vercel.app', 'https://socialnet-dblr.onrender.com'], credentials: true };
+// https://social-net-five.vercel.app
+// 'https://socialnet-dblr.onrender.com'
+// "http://localhost:5173"
+let corsOpts = { origin: "https://social-net-five.vercel.app", credentials: true };
 app.use(cors(corsOpts));
 app.use(express.json());
 app.use(cookieParser());
