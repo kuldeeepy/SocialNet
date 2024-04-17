@@ -11,7 +11,7 @@ import userRoute from "./routes/userRoute.js";
 import generalRoute from "./routes/generalRoute.js";
 import postRoute from "./routes/postRoute.js";
 
-let corsOpts = { origin: "http://localhost:5173", credentials: true };
+let corsOpts = { origin: ["http://localhost:5173", 'https://socialnet-dblr.onrender.com'], credentials: true };
 app.use(cors(corsOpts));
 app.use(express.json());
 app.use(cookieParser());
