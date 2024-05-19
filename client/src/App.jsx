@@ -12,8 +12,8 @@ import CreatePost from "./pages/CreatePost.jsx";
 import CreateReel from "./pages/CreateReel.jsx";
 import { AuthContext } from "./Context.jsx";
 import { useState } from "react";
-// const URL = "https://socialnet-dblr.onrender.com";
-const URL = "http://localhost:2000/v1";
+const URL = "https://socialnet-dblr.onrender.com/v1";
+// const URL = "http://localhost:2000/v1";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
