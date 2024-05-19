@@ -11,9 +11,11 @@ import userRoute from "./routes/userRoute.js";
 import generalRoute from "./routes/generalRoute.js";
 import postRoute from "./routes/postRoute.js";
 
-let origins = ["https://social-net-five.vercel.app", "http://localhost:5173"];
+// let origins = ["https://social-net-five.vercel.app", "http://localhost:5173"];
 
-app.use(cors({ origin: origins, credentials: true }));
+app.use(
+  cors({ origin: "https://social-net-five.vercel.app", credentials: true })
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
