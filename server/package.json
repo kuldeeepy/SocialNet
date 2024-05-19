@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node"
+    "start": "nodemon index.js",
+    "dev": "node index.js"
   },
   "keywords": [],
   "author": "Kuldeep",

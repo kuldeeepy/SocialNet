@@ -3,7 +3,8 @@ import { useState } from "react";
 import { URL } from "../App.jsx";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner.jsx";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreatePost = () => {
   const [loading, setLoading] = useState(false);
@@ -20,20 +21,24 @@ const CreatePost = () => {
     formData.append("caption", caption);
 
     axios
-      .post(`${URL}/post`, formData, { withCredentials: true })
+      .post(`${URL}/post`, formData, {
+        withCredentials: true,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((res) => {
         setLoading(false);
         navigate("/");
-        toast.success("Post Created Successfully");
+
+        console.log(res.data);
       })
-      .catch((error) => {
+      .catch((err) => {
         setLoading(false);
-        console.log(error);
+        console.log(err.response);
       });
   };
   return (
     <div className="p-4">
-      <Toaster />
+      <ToastContainer />
       <h1 className="text-3xl my-4">Create Post</h1>
       {loading ? (
         <Spinner />

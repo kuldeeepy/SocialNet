@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { IoIosSettings } from "react-icons/io";
 import { FaAngleLeft } from "react-icons/fa6";
@@ -51,7 +52,7 @@ function Profile() {
   }, [image]);
   return (
     <div className="text-lg">
-      <Toaster />
+      <ToastContainer />
       {loading ? (
         <Spinner />
       ) : (

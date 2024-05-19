@@ -10,23 +10,30 @@ import Profile from "./pages/Profile.jsx";
 import Nav from "./components/Nav.jsx";
 import CreatePost from "./pages/CreatePost.jsx";
 import CreateReel from "./pages/CreateReel.jsx";
-const URL = "https://socialnet-dblr.onrender.com";
+import { AuthContext } from "./Context.jsx";
+import { useState } from "react";
+// const URL = "https://socialnet-dblr.onrender.com";
+const URL = "http://localhost:2000/v1";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("token"));
+
   return (
-    <Routes>
-      <Route path="/" element={<Nav />}>
-        <Route exact path="/" element={<Home />} />
-      </Route>
-      <Route path="/profile/:username" element={<Profile />} />
-      <Route path="/search" element={<Search />} />
-      <Route path="/reels" element={<Reel />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/inbox" element={<Chat />} />
-      <Route path="/post/create" element={<CreatePost />} />
-      <Route path="/reel/create" element={<CreateReel />} />
-    </Routes>
+    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <Routes>
+        <Route path="/" element={<Nav />}>
+          <Route exact path="/" element={<Home />} />
+        </Route>
+        <Route path="/profile/:username" element={<Profile />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/reels" element={<Reel />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/inbox" element={<Chat />} />
+        <Route path="/post/create" element={<CreatePost />} />
+        <Route path="/reel/create" element={<CreateReel />} />
+      </Routes>
+    </AuthContext.Provider>
   );
 }
 

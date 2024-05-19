@@ -1,7 +1,8 @@
 import Foot from "../components/Foot.jsx";
 import { IoSearch } from "react-icons/io5";
 import Spinner from "../components/Spinner.jsx";
-import toast, { Toaster } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FaAngleLeft } from "react-icons/fa6";
 import { useSearchParams, Link } from "react-router-dom";
@@ -13,6 +14,7 @@ function Search() {
   const [posts, setPosts] = useState([]);
   const [username, setUsername] = useSearchParams();
   const [result, setResult] = useState("");
+
   const handleSearch = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -25,9 +27,7 @@ function Search() {
         })
         .catch((err) => {
           setLoading(false);
-          err.response.status === 404
-            ? toast.error("User Not Found")
-            : console.log(err);
+          console.log(err.response);
         });
     }
   };
@@ -45,6 +45,7 @@ function Search() {
         console.log(err.message);
       });
   }, []);
+
   return (
     <>
       <div className="min-[650px]:ml-16">
@@ -58,7 +59,7 @@ function Search() {
             className="bg-inherit px-1 focus:outline-none w-full py-1 placeholder:font-light placeholder:text-black"
           />
         </div>
-        <Toaster />
+        <ToastContainer />
         {loading ? (
           <Spinner />
         ) : (

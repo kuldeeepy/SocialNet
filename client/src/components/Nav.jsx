@@ -1,25 +1,20 @@
 import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { LuPlusSquare } from "react-icons/lu";
 import Modal from "./Modal.jsx";
+import { useContext } from "react";
+import { AuthContext } from "../Context.jsx";
 import { URL } from "../App.jsx";
 
 function Nav() {
-  const { isLoggedIn, user } = useAuth();
   const [toggle, setToggle] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   let navigate = useNavigate();
 
   const handleLogOut = () => {
-    axios
-      .get(`${URL}/logout`, { withCredentials: true })
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
   };
   return (
     <>

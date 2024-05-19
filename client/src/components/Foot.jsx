@@ -4,10 +4,11 @@ import { BiMoviePlay } from "react-icons/bi";
 import { TbMessageCircleBolt } from "react-icons/tb";
 import { FaRegUserCircle } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
-import useAuth from "../hooks/useAuth.jsx";
+import { useContext } from "react";
+import { AuthContext } from "../Context.jsx";
 
 function Foot() {
-  const { isLoggedIn, user } = useAuth();
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <>
       {/* <div className="h-[42px] bg-transparent"></div> */}
@@ -25,7 +26,7 @@ function Foot() {
           <TbMessageCircleBolt />
         </Link>
         {isLoggedIn ? (
-          <Link to={`/profile/${user.uname}`}>
+          <Link to={`/profile/`}>
             <FaRegUserCircle />
           </Link>
         ) : (

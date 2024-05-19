@@ -6,12 +6,10 @@ import { FaRegBookmark } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import Spinner from "./Spinner.jsx";
-import useAuth from "../hooks/useAuth.jsx";
 import { URL } from "../App.jsx";
 import axios from "axios";
 
 function Post() {
-  const { user } = useAuth();
   const [posts, setPosts] = useState([]);
   const [like, setLike] = useState(false);
   const [loading, setLoading] = useState(false);

@@ -1,4 +1,6 @@
 import mongoose, { Schema } from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const userSchema = new Schema({
   uname: {
@@ -25,6 +27,23 @@ const userSchema = new Schema({
   posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
+
+userSchema.pre("save", async function (next) {
+  if (this.isModified("pwd")) {
+    this.pwd = await bcrypt.hash(this.pwd, 10);
+  }
+  next();
+});
+
+userSchema.methods.comparePwd = async function (password) {
+  return await bcrypt.compare(password, this.pwd);
+};
+
+userSchema.methods.genToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "24h",
+  });
+};
 
 userSchema.index({ uname: "text" });
 const User = mongoose.model("User", userSchema);
