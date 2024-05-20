@@ -19,8 +19,9 @@ function Profile() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${URL}/profile/${username}`, {
+      .get(`${URL}/profile`, {
         withCredentials: true,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((res) => {
         setLoading(false);
@@ -28,7 +29,7 @@ function Profile() {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        console.log(err.response);
       });
   }, []);
 
@@ -38,18 +39,19 @@ function Profile() {
     let formData = new FormData();
     formData.append("image", image);
     axios
-      .patch(`http://localhost:2000/${user._id}/edit`, formData, {
+      .patch(`${URL}/${user._id}/edit`, formData, {
         withCredentials: true,
       })
       .then((res) => {
         setLoading(false);
-        navigate(`/profile/${user.uname}`);
+        navigate("/profile");
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
+        console.log(err.response);
       });
   }, [image]);
+
   return (
     <div className="text-lg">
       <ToastContainer />

@@ -13,7 +13,7 @@ import isAuthenticated from "../middlewares/authHandler.js";
 
 router.post("/signup", signup);
 router.post("/login", login);
-router.get("/profile/:username", isAuthenticated, profile);
+router.get("/profile", isAuthenticated, profile);
 router.patch("/:id/edit", upload.single("image"), updateDp);
 
 export default router;

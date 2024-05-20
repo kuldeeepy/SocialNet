@@ -31,9 +31,12 @@ function Login() {
       })
       .catch((err) => {
         setLoading(false);
-        err.response.status === 401
-          ? toast.error("User Not Found")
-          : console.log(err);
+        toast.error(`${err.response.data}`, {
+          position: "top-center",
+          autoClose: 1000,
+          onClose: () => navigate("/login"),
+        });
+        setData({ uname: "", pwd: "" });
       });
   };
 

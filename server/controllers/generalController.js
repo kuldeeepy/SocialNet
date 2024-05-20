@@ -2,14 +2,17 @@ import User from "../modals/userModal.js";
 import Reel from "../modals/reelModal.js";
 
 const serachUser = async (req, res, next) => {
-  let { username } = req.params;
-  let result = await User.findOne({ $text: { $search: username } }).populate(
-    "posts"
-  );
-  result.pwd ? (result.pwd = null) : "";
-  await result.save();
-  if (!result) return res.status(404).json({ message: "No user found" });
-  res.status(200).send(result);
+  try {
+    let { username } = req.params;
+    let result = await User.findOne({ $text: { $search: username } }).populate(
+      "posts"
+    );
+    if (!result) return res.status(404).json({ message: "No user found" });
+    result.pwd = null;
+    res.status(200).send(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const uploadReel = async (req, res, next) => {

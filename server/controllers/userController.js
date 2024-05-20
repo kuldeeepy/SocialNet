@@ -48,11 +48,15 @@ const login = async (req, res, next) => {
 };
 
 const profile = async (req, res, next) => {
-  let { username } = req.params;
-  let user = await User.findOne({ uname: username }).populate("posts");
-  if (!user) return res.status(404).json({ message: "No user found" });
-  user.pwd = null;
-  res.status(200).send(user);
+  if (!req.user) return res.status(401).send("Please Login");
+  try {
+    let user = await User.findById({ _id: req.user }).populate("posts");
+    if (!user) return res.status(404).json({ message: "No user found" });
+    user.pwd = null;
+    res.status(200).send(user);
+  } catch (error) {
+    next(error);
+  }
 };
 
 const updateDp = async (req, res, next) => {

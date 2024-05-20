@@ -5,32 +5,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { FaAngleLeft } from "react-icons/fa6";
-import { useSearchParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { URL } from "../App.jsx";
 
 function Search() {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [username, setUsername] = useSearchParams();
+  const [username, setUsername] = useState("");
   const [result, setResult] = useState("");
-
-  const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      setUsername(username);
-      axios
-        .get(`${URL}/search/${username}`)
-        .then((res) => {
-          setLoading(false);
-          setResult(res.data);
-        })
-        .catch((err) => {
-          setLoading(false);
-          console.log(err.response);
-        });
-    }
-  };
 
   useEffect(() => {
     setLoading(true);
@@ -45,6 +28,23 @@ function Search() {
         console.log(err.message);
       });
   }, []);
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      axios
+        .get(`${URL}/search/${username}`)
+        .then((res) => {
+          setLoading(false);
+          setResult(res.data);
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err.response);
+        });
+    }
+  };
 
   return (
     <>

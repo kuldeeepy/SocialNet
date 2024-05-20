@@ -26,7 +26,7 @@ function Foot() {
           <TbMessageCircleBolt />
         </Link>
         {isLoggedIn ? (
-          <Link to={`/profile/`}>
+          <Link to={`/profile`}>
             <FaRegUserCircle />
           </Link>
         ) : (
